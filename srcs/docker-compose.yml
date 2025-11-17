@@ -1,0 +1,5 @@
+services:
+  database:
+    image: mariadb
+    restart: always
+    enviroment: 
