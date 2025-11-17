@@ -1,5 +1,40 @@
 services:
-  database:
-    image: mariadb
+  #database will be mariadb
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb:10.11.11
     restart: always
-    enviroment: 
+    env_file: .env
+    ports: 
+      - "3306:3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "--protocol=tcp", "--host=localhost", "-u", "$WORDPRESS_DATABASE_USER", "--password=$WORDPRESS_DATABASE_USER_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  network:
+      name: docker-network
+      driver: bridge
+
+volumes:
+  mariadb:
+        name: mariadb
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: /home/mkhlouf/data/mariadb
+  wordpress:
+        name: wordpress
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: /home/tmenkovi/data/wordpress
