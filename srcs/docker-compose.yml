@@ -5,7 +5,7 @@ volumes:
          driver_opts:
            type: none
            o: bind
-           device: /home/tmenkovi/data/mariadb
+           device: /home/mkhlouf/data/mariadb
 
     wordpress:
         name: wordpress
@@ -13,7 +13,7 @@ volumes:
         driver_opts:
           type: none
           o: bind
-          device: /home/tmenkovi/data/wordpress
+          device: /home/mkhlouf/data/wordpress
 
 networks:
     network:
