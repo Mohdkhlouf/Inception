@@ -1,3 +1,5 @@
+FROM alpine:3.20.6
+
 RUN apk update && apk add mariadb-client \
     php83 \
     php83-fpm \
